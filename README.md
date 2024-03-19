@@ -33,21 +33,24 @@ Before proceeding, ensure you have:
     Ensure you have Azure CLI installed and use the following command to login with your Service Principal credentials:
 
     ```bash
-    az login --service-principal -u <service-principal-id> -p <service-principal-secret> --tenant <tenant-id>
-    ```
+     Replace the following keys in the service_principal.tfvars file:
 
-    Replace `<service-principal-id>`, `<service-principal-secret>`, and `<tenant-id>` with your Azure Service Principal credentials.
+        ```hcl
+        client_id       = "<service-principal-id>"
+        client_secret   = "<service-principal-secret>"
+        tenant_id       = "<tenant-id>"
+        subscription_id = "<subscription-id>"
 
 4. **Preview Changes:**
 
     ```bash
-    terraform plan
+    terraform plan -var-file=service_principal.tfvars
     ```
 
 5. **Apply Configuration:**
 
     ```bash
-    terraform apply
+    terraform apply -var-file=service_principal.tfvars --auto-approve
     ```
 
 6. **Review Outputs:** Check for errors/warnings; resources should be provisioned.
@@ -57,7 +60,7 @@ Before proceeding, ensure you have:
 To delete Azure resources:
 
 ```bash
-terraform destroy --auto-approve
+terraform destroy -var-file=service_principal.tfvars --auto-approve
 ```
 
 ## License
